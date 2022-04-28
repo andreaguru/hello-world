@@ -1,4 +1,3 @@
-var DISQUSWIDGETS, disqus_domain, disqus_shortname;
 typeof DISQUSWIDGETS === "undefined" && (DISQUSWIDGETS = function() {
     var f = document,
         a = f.getElementById("dsq-count-scr"),
