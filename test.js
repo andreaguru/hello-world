@@ -1,66 +1,29 @@
-typeof DISQUSWIDGETS === "undefined" && (DISQUSWIDGETS = function() {
-    var f = document,
-        a = f.getElementById("dsq-count-scr"),
-        a = a && a.src.match(/(https?:)?\/\/(?:www\.)?([\w_\-]+)\.((?:dev\.)?disqus\.(?:com|org)(?::\d+)?)/i),
-        e = {},
-        s = f.head || f.body,
-        j = {},
-        q = {
-            identifier: 1,
-            url: 2
-        };
-    e.domain = a && a[3] || disqus_domain || "disqus.com";
-    e.forum = a && a[2] || disqus_shortname;
-    e.proto = a && a[1] || "";
-    e.getCount = function(b) {
-        var c;
-        c = encodeURIComponent;
-        var a = e.proto + "//" + e.forum + "." + e.domain + "/count-data.js?",
-            d = [],
-            k = 0,
-            l = 10,
-            r = "",
-            b = b || {};
-        b.reset &&
-            (j = {}, r = "&_=" + +new Date);
-        for (var b = [f.getElementsByTagName("A"), f.getElementsByClassName && f.getElementsByClassName("disqus-comment-count") || []], m, i, g, h, n = 0; n < b.length; n++) {
-            m = b[n];
-            for (var o = 0; o < m.length; o++) {
-                i = m[o];
-                g = i.getAttribute("data-disqus-identifier");
-                h = i.hash === "#disqus_thread" && i.href.replace("#disqus_thread", "") || i.getAttribute("data-disqus-url");
-                if (g) h = q.identifier;
-                else if (h) g = h, h = q.url;
-                else continue;
-                var p;
-                j.hasOwnProperty(g) ? p = j[g] : (p = j[g] = {
-                    elements: [],
-                    type: h
-                }, d.push(c(h) + "=" + c(g)));
-                p.elements.push(i)
-            }
-        }
-        d.sort();
-        for (c = d.slice(k, l); c.length;) b = f.createElement("script"), b.src = a + c.join("&") + r, s.appendChild(b), k += 10, l += 10, c = d.slice(k, l)
+/* PLEASE DO NOT COPY AND PASTE THIS CODE. */
+(function() {
+    var w = window,
+        C = '___grecaptcha_cfg',
+        cfg = w[C] = w[C] || {},
+        N = 'grecaptcha';
+    var gr = w[N] = w[N] || {};
+    gr.ready = gr.ready || function(f) {
+        (cfg['fns'] = cfg['fns'] || []).push(f);
     };
-    e.displayCount = function(b) {
-        for (var c, a, d, e = b.counts, b = b.text.comments; c = e.shift();)
-            if (a = j[c.id]) {
-                switch (c.comments) {
-                    case 0:
-                        d = b.zero;
-                        break;
-                    case 1:
-                        d = b.one;
-                        break;
-                    default:
-                        d = b.multiple
-                }
-                c = d.replace("{num}", c.comments);
-                a = a.elements;
-                for (d = a.length - 1; d >= 0; d--) a[d].innerHTML = c
-            }
-    };
-    return e
-}());
-DISQUSWIDGETS.getCount();
+    w['__recaptcha_api'] = 'https://www.google.com/recaptcha/api2/';
+    (cfg['render'] = cfg['render'] || []).push('explicit');
+    (cfg['onload'] = cfg['onload'] || []).push('idGrecaptchaOnLoadCallback');
+    w['__google_recaptcha_client'] = true;
+    var d = document,
+        po = d.createElement('script');
+    po.type = 'text/javascript';
+    po.async = true;
+    po.src = 'https://www.gstatic.com/recaptcha/releases/QENb_qRrX0-mQMyENQjD6Fuj/recaptcha__de.js';
+    po.crossOrigin = 'anonymous';
+    po.integrity = 'sha384-hhyeuXyp6UP80ldeQlTyP4K68MmYjubpYWdIwN3n8tQkMiV9BLhXLt5eRQJWvssx';
+    var e = d.querySelector('script[nonce]'),
+        n = e && (e['nonce'] || e.getAttribute('nonce'));
+    if (n) {
+        po.setAttribute('nonce', n);
+    }
+    var s = d.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(po, s);
+})();
